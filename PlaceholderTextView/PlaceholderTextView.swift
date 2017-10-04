@@ -19,6 +19,7 @@ class PlaceholderTextView: UITextView {
   var placeholder: String? {
     didSet {
       placeholderLabel.text = placeholder
+      hidePlaceholderIfNeeded()
     }
   }
   
@@ -29,6 +30,7 @@ class PlaceholderTextView: UITextView {
     placeholderLabel.textColor = textColor?.withAlphaComponent(Constants.placeholderAlpha)
     addSubview(placeholderLabel)
     addNotifications()
+    hidePlaceholderIfNeeded()
     return placeholderLabel
   }()
   
@@ -44,6 +46,12 @@ class PlaceholderTextView: UITextView {
   override func layoutSubviews() {
     super.layoutSubviews()
     placeholderLabel.sizeToFit()
+    hidePlaceholderIfNeeded()
+  }
+  
+  private func hidePlaceholderIfNeeded() {
+    placeholderLabel.isHidden = !text.isEmpty
+    placeholderLabel.alpha = text.isEmpty ? 1 : 0
   }
   
   private func addNotifications() {
@@ -67,16 +75,16 @@ class PlaceholderTextView: UITextView {
   
   private func showPlaceholder(duration: TimeInterval) {
     placeholderLabel.isHidden = false
-    UIView.animate(
-      withDuration: duration,
-      animations: { [weak self] in
-        self?.placeholderLabel.alpha = 1
+    UIView.animate(withDuration: duration,
+                   animations: { [weak self] in
+                    self?.placeholderLabel.alpha = 1
     })
   }
   
   private func hidePlaceholder(duration: TimeInterval) {
-    UIView.animate(withDuration: duration, animations: {
-      self.placeholderLabel.alpha = 0
+    UIView.animate(withDuration: duration,
+                   animations: {
+                    self.placeholderLabel.alpha = 0
     }, completion: { [weak self] completed in
       self?.placeholderLabel.isHidden = true
     })
