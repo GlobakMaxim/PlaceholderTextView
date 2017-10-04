@@ -2,7 +2,7 @@
 
 ![Image of placeholder](./placeholder.jpg)
 
-Just one public properie...
+Just one public property...
 
 * placeholder
 
