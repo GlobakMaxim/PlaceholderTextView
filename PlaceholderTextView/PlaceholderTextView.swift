@@ -53,6 +53,10 @@ class PlaceholderTextView: UITextView {
                                            object: nil)
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   @objc private func textViewDidChange() {
     if self.text.isEmpty {
       showPlaceholder(duration: Constants.defaultAnimationDuration)
