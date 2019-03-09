@@ -2,8 +2,8 @@
 //  PlaceholderTextView.swift
 //  PlaceholderTextView
 //
-//  Created by Globak Maxim on 03/10/2017.
-//  Copyright © 2017 Maxim Globak. All rights reserved.
+//  Created by Globak Maxim
+//  Copyright © Maxim Globak. All rights reserved.
 //
 
 import UIKit
@@ -13,10 +13,10 @@ fileprivate struct Constants {
   static let placeholderAlpha: CGFloat = 0.35
 }
 
-@IBDesignable class PlaceholderTextView: UITextView {
+@IBDesignable public class PlaceholderTextView: UITextView {
   
   // MARK: - Public properties
-  @IBInspectable var placeholder: String? {
+  @IBInspectable public var placeholder: String? {
     didSet {
       placeholderLabel.text = placeholder
     }
@@ -48,13 +48,13 @@ fileprivate struct Constants {
     commonInit()
   }
   
-  init(frame: CGRect) {
+  public init(frame: CGRect) {
     super.init(frame: frame, textContainer: nil)
     commonInit()
     
   }
   
-  required init?(coder: NSCoder) {
+  required public init?(coder: NSCoder) {
     super.init(coder: coder)
     commonInit()
   }
@@ -70,7 +70,7 @@ fileprivate struct Constants {
   }
   
   // MARK: - Common functions
-  override func layoutSubviews() {
+  override public func layoutSubviews() {
     super.layoutSubviews()
     placeholderLabel.frame = placeholderFrame
     placeholderLabel.sizeToFit()
@@ -112,7 +112,7 @@ fileprivate struct Constants {
   private func addNotifications() {
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(textViewDidChange),
-                                           name: NSNotification.Name.UITextViewTextDidChange,
+                                           name: UITextField.textDidChangeNotification,
                                            object: nil)
   }
   
